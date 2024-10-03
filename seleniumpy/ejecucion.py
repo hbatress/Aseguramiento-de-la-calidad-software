@@ -1,10 +1,11 @@
 import unittest
 from selenium import webdriver
+from pyunitreport import HTMLTestRunner
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoAlertPresentException
 import time
 
-class LanguageOptions(unittest.TestCase):
+class BuyLaptops(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         driver = self.driver
@@ -12,7 +13,7 @@ class LanguageOptions(unittest.TestCase):
         driver.maximize_window()
         driver.get('https://www.demoblaze.com/')
 
-    def test_select_language(self):
+    def steps_to_buy(self):
         laptops_link = self.driver.find_element(By.XPATH,"//a[@onclick=\"byCat('notebook')\"]")
         laptops_link.click()
         time.sleep(5)
@@ -35,4 +36,4 @@ class LanguageOptions(unittest.TestCase):
         self.driver.quit()
 
 if __name__ == "__main__":
-   unittest.main(verbosity=2)
+   unittest.main(verbosity=2, testRunner = HTMLTestRunner(output = 'reportes', report_name='purchasing-report'))
